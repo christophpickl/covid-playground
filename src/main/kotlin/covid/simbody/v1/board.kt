@@ -1,4 +1,4 @@
-package simbody
+package covid.simbody.v1
 
 import java.awt.Color
 import java.awt.GridBagConstraints

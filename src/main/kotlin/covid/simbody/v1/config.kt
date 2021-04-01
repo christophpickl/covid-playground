@@ -1,4 +1,4 @@
-package simbody
+package covid.simbody.v1
 
 const val CELL_SIZE = 40
 
@@ -12,6 +12,7 @@ val Board.Companion.sample1
             move(Direction.Down, 3)
             move(Direction.Right, 2)
             move(Direction.Up, 3)
+            move(Direction.Left, 1)
         }
         return Board(BOARD_COLS, BOARD_ROWS, entryCell, cells2.associateBy { it.position })
     }

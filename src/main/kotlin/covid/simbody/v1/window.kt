@@ -1,50 +1,19 @@
-package simbody
+package covid.simbody.v1
 
-import java.awt.*
+import java.awt.BorderLayout
+import java.awt.FlowLayout
 import javax.swing.JButton
 import javax.swing.JFrame
 import javax.swing.JPanel
 
-object SimBodyApp {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        println("SimBody starting ...")
-        Engine(Board.sample1).showWindow()
-    }
-}
-
-class Engine(
-    val board: Board
-) : Listener {
-
-    private val window by lazy {
-        MainWindow(board, this)
-    }
-
-    fun showWindow() {
-        window.showYourself()
-    }
-
-    override fun onTick() {
-        board.tick()
-        window.repaint()
-    }
-
-    override fun onAddParticle() {
-        board.entryVesselCell.moveInto(1)
-        board.entryVesselCell.accumulateParticles()
-        window.repaint()
-    }
-}
-
-interface Listener {
+interface UserActionListener {
     fun onTick()
     fun onAddParticle()
 }
 
 class MainWindow(
     val board: Board,
-    val listener: Listener
+    val listener: UserActionListener
 ) : JFrame("Sim Body") {
     init {
         val btnPanel = JPanel(FlowLayout()).apply {
@@ -72,12 +41,4 @@ class MainWindow(
         setLocationRelativeTo(null)
         isVisible = true
     }
-}
-
-data class Point(val x: Int, val y: Int) {
-    private val asString = "$x/$y"
-    override fun toString() = asString
-
-    fun move(direction: Direction): Point = direction.manipulate(this)
-
 }

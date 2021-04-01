@@ -1,18 +1,14 @@
-package simbody
+package covid.simbody.v1
 
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.Graphics
 import javax.swing.JPanel
 
-interface TickManager {
-    fun onVesselCell(cell: VesselCell)
-}
-
 sealed class Cell(
     val baseColor: Color,
+    val cellSize: Int = CELL_SIZE,
 ) : JPanel() {
-    val cellSize = CELL_SIZE
 
     init {
         size = Dimension(cellSize, cellSize)
@@ -24,10 +20,7 @@ sealed class Cell(
     abstract fun cellPaint(g: Graphics)
 
     override fun paint(g: Graphics) {
-
-
         cellPaint(g)
-
     }
 
     protected fun Graphics.drawCellBorder() {
@@ -56,7 +49,7 @@ enum class Direction {
         override fun manipulate(p: Point) = Point(p.x + 1, p.y)
     };
 
-    abstract fun manipulate(position: Point): Point
+    abstract fun manipulate(p: Point): Point
 }
 
 class VoidCell : Cell(Color.RED) {
@@ -90,6 +83,7 @@ class VesselCell(
 
         g.color = Color.BLACK
         g.drawString("$currentParticles", 10, 20)
+        g.drawString("${direction.name.first()}", 10, 30)
 
         g.drawCellBorder()
     }
