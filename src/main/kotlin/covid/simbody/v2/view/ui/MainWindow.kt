@@ -1,46 +1,34 @@
-package covid.simbody.v2
+package covid.simbody.v2.view.ui
 
-import covid.simbody.v2.logic.Board
+import covid.simbody.v2.view.Board
 import java.awt.BorderLayout
 import java.awt.FlowLayout
-import java.awt.GridBagLayout
 import javax.swing.JButton
 import javax.swing.JFrame
-import javax.swing.JLabel
 import javax.swing.JPanel
-
-interface WindowListener {
-    fun doTick()
-    fun addFood()
-}
-
-class BoardPanel(
-    private val board: Board
-) : JPanel(GridBagLayout()) {
-    // FIXME
-}
 
 class MainWindow(
     board: Board,
-    listener: WindowListener
+    listener: InteractionListener
 ) : JFrame("SimBody") {
 
     private val boardPanel = BoardPanel(board)
 
     init {
         val btnPanel = JPanel(FlowLayout()).apply {
-            add(JButton("add food").apply {
+            add(JButton("add O2").apply {
                 addActionListener {
-                    listener.addFood()
+                    listener.addOxygen()
+                    this@MainWindow.repaint()
                 }
             })
-            add(JButton("click to tick").apply {
+            add(JButton("tick").apply {
                 addActionListener {
                     listener.doTick()
+                    this@MainWindow.repaint()
                 }
             })
         }
-
 
         val panel = JPanel(BorderLayout())
         panel.add(btnPanel, BorderLayout.SOUTH)
