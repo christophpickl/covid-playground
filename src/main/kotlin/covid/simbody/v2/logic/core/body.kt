@@ -1,9 +1,12 @@
 package covid.simbody.v2.logic.core
 
+import covid.simbody.v2.view.ui.InteractionListener
+
 class Body(
     val cells: Set<Cell>,
-) {
-    fun tick() {
+): InteractionListener {
+
+    override fun onTick() {
         val p2: MutableSet<ToBeMovedParticle> = cells.associateParticles()
         p2.forEach { moveParticle ->
             require(moveParticle.cell.particles.remove(moveParticle.delegate))
@@ -20,6 +23,11 @@ class Body(
             }
         }
         return associated
+    }
+
+    override fun addErythro() {
+        println("LISTENER => add oxygen")
+        cells.first().particles.add(ErythroParticle())
     }
 }
 

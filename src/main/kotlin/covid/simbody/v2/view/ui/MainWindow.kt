@@ -18,13 +18,13 @@ class MainWindow(
         val btnPanel = JPanel(FlowLayout()).apply {
             add(JButton("add O2").apply {
                 addActionListener {
-                    listener.addOxygen()
+                    listener.addErythro()
                     this@MainWindow.repaint()
                 }
             })
             add(JButton("tick").apply {
                 addActionListener {
-                    listener.doTick()
+                    listener.onTick()
                     this@MainWindow.repaint()
                 }
             })

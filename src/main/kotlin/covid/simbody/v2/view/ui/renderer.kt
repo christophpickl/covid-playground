@@ -31,7 +31,7 @@ sealed class CellRenderer {
     }
 
     protected fun drawInfo(g: Graphics, cell: Cell) {
-        drawParticle<OxygenParticle>(g, cell, OxygenParticle.Info)
+        drawParticle<ErythroParticle>(g, cell, ErythroParticle.Info)
     }
 
     private inline fun <reified K : Particle> drawParticle(g: Graphics, cell: Cell, info: ParticleInfo) {

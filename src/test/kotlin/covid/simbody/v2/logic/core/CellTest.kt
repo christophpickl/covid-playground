@@ -13,8 +13,8 @@ class CellTest {
 
     @BeforeMethod
     fun reset() {
-        cell1 = OrganCell()
-        cell2 = OrganCell()
+        cell1 = LungCell()
+        cell2 = LungCell()
     }
 
     fun `wire input`() {

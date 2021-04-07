@@ -8,9 +8,12 @@ import covid.simbody.v2.view.Position
 import java.awt.*
 import javax.swing.JPanel
 
-interface InteractionListener {
-    fun doTick()
-    fun addOxygen()
+interface InteractionListener: TickListener {
+    fun addErythro()
+}
+
+interface TickListener {
+    fun onTick()
 }
 
 class BoardPanel(

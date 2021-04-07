@@ -9,15 +9,15 @@ import org.testng.annotations.Test
 @Test
 class BodyTest {
 
-    private lateinit var particle: OxygenParticle
+    private lateinit var particle: ErythroParticle
     private lateinit var organ: OrganCell
     private lateinit var artery: ArteryCell
     private lateinit var body: Body
 
     @BeforeMethod
     fun reset() {
-        particle = OxygenParticle()
-        organ = OrganCell()
+        particle = ErythroParticle()
+        organ = LungCell()
         artery = ArteryCell()
         organ.wireOutput(artery)
         artery.wireOutput(organ)
@@ -26,7 +26,7 @@ class BodyTest {
     }
 
     fun `tick, move particle`() {
-        body.tick()
+        body.onTick()
 
         assertThat(organ.particles).isEmpty()
         assertThat(artery.particles).containsOnly(particle)
