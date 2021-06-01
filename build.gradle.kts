@@ -25,11 +25,12 @@ dependencies {
     implementation("org.apache.commons:commons-math3:3.6.1")
 
     // arrow
-    fun arrow(id: String) {
-        implementation("io.arrow-kt:arrow-$id:0.13.2")
+    fun arrow(id: String, version: String = "0.13.2") {
+        implementation("io.arrow-kt:arrow-$id:$version")
     }
     arrow("core")
     arrow("optics")
+    arrow("syntax", "0.12.1")
     kapt("io.arrow-kt:arrow-meta:0.13.2")
 
     // misc

@@ -3,13 +3,6 @@ package covid.arrow
 import arrow.core.*
 import arrow.typeclasses.Semigroup
 
-// arrow => merge of kategory and funktionale
-// monad => wrapper classs (factory method, map, flatMap)
-// typeclasses => Monoid, Semigroup, Semiring
-
-// Arrow = { Core, FX, Optics, Meta }
-// https://medium.com/beingprofessional/understanding-functor-and-monad-with-a-bag-of-peanuts-8fa702b3f69e
-
 fun main() {
 //    `sample Const`()
 //    `sample Option`()
@@ -17,7 +10,8 @@ fun main() {
 //    `sample Eval`()
 //    `sample Either error handling`()
 //    `sample misc`()
-    `sample Applicatives`()
+//    `sample Applicatives`()
+    `sample memoization`()
 }
 
 fun `sample Const`() {
@@ -160,7 +154,7 @@ fun `sample Applicatives`() {
     // Some(3).map(::curriedSum) => Some({ 3 + b})
     // Some({ 3 + b }) apply Some(2)
 
-    val product = Some(3).map(curry(::trippleProduct)) apply Some(2) apply Some (2)
+    val product = Some(3).map(curry(::trippleProduct)) apply Some(2) apply Some(2)
     println("product: $product") // => Some(12)
 }
 
@@ -181,3 +175,10 @@ fun trippleProduct(a: Int, b: Int, c: Int) = a * b * c
 
 fun <A, B, C, D> curry(f: (A, B, C) -> D): (A) -> (B) -> (C) -> D =
     { a -> { b -> { c -> f(a, b, c) } } }
+
+fun `sample memoization`() {
+    val heavyComputation: (Int) -> Int = { println("heavy compute... ($it)"); it * 2 }
+    val heavyComputationMem = heavyComputation.memoize<Int, Int>()
+    println("call 1: " + heavyComputationMem(21))
+    println("call 2: " + heavyComputationMem(21))
+}
